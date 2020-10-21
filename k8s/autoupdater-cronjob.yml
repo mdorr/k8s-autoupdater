@@ -1,0 +1,32 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: autoupdater-cronjob
+  namespace: autoupdater
+spec:
+  schedule: "0 * * * *"
+  jobTemplate: 
+    spec:
+      template:
+        metadata:
+          labels:
+            app: autoupdater-cronjob
+        spec:
+          serviceAccountName: autoupdater-sa
+          containers:
+          - name: autoupdater-cronjob
+            image: k8s-autoupdater
+            env:
+              - name: DOCKERHUB_USERNAME 
+                valueFrom:
+                  secretKeyRef:
+                    name: autoupdater-secrets
+                    key: dockerhubUsername
+              - name: DOCKERHUB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: autoupdater-secrets
+                    key: dockerhubPassword
+          restartPolicy: OnFailure
+          imagePullSecrets:
+          - name: private-dockerhub

@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: list-pods_autoupdater-sa
+  namespace: autoupdater
+subjects:
+- kind: ServiceAccount
+  name: autoupdater-sa
+  namespace: autoupdater
+roleRef:
+  kind: ClusterRole
+  name: list-pods
+  apiGroup: rbac.authorization.k8s.io
