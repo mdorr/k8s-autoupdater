@@ -14,7 +14,7 @@ docker build -t autoupdater -f Dockerfile
 
 See the supplied [Sample Files](/k8s). You need to modify the following files:
 
-- **[autoupdater-cronjob.yml](/k8s/autoupdater-cronjob.yml)**: Update the `image` line to point to the correct location of the autoupdater image, typically at dockerhub: <your organization>/autoupdater. 
+- **[autoupdater-cronjob.yml](/k8s/autoupdater-cronjob.yml)**: Update the `image` line to point to the correct location of the autoupdater image, typically at dockerhub: {your_organization}/autoupdater. 
 - **[autoupdater-dockerhub.yml](/k8s/autoupdater-dockerhub.yml)**: Add a valid docker hub token with permissions to pull the `autoupdater` image
 - **[autoupdater-secrets.yml](/k8s/autoupdater-secrets.yml)**: Add valid (base64-encoded) docker hub credentials to retrieve the latest versions for all images that should be updated. These can be different from the docker hub account pulling the `autoupdater` image.
 
